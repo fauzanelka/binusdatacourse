@@ -8,15 +8,9 @@ use Slim\Views\Twig;
 
 
 class HomeController {
-    private $view;
-
-    public function __construct(Twig $view)
-    {
-        $this->view = $view;
-    }
-    
     public function home(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
-    { 
-        return $this->view->render($response, 'index.html.twig');
+    {
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'index.html.twig');
     }
 }
